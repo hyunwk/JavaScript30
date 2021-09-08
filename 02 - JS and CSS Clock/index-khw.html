@@ -87,20 +87,13 @@
       const secs = now.getSeconds();
       const secDegrees = ((secs / 60) * 360) + 90;
       secHand.style.transform = `rotate(${secDegrees}deg)`;
-
-      /* prvent weird min, hour change when secs == 0, */
-      if(secs==0){
-        secHand.style.transitionDuration = '0s';
-        minHand.style.transitionDuration = '0s';
-        hourHand.style.transitionDuration = '0s';
-      } else {
-        secHand.style.transitionDuration = '0.05s';
-        minHand.style.transitionDuration = '0.05s';
-        hourHand.style.transitionDuration = '0.05s';
-      }
+  
+      /* prvent weird min, hour change'`` when secs == 0, */
+      if(secs===0)
+        secHand.style.transition = 'none';
       
       const mins = now.getMinutes();
-      const minDegrees = ((mins / 60) * 360) + ((secs/60)*6) + 90;
+      const minDegrees = ((mins / 60) * 360) + 90;
       minHand.style.transform = `rotate(${minDegrees}deg)`;
       
       const hours = now.getHours();
