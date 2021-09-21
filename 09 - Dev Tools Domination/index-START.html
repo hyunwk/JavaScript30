@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
@@ -11,6 +13,8 @@
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
 
+
+    // element break on attribute modification 누를 경우 해당 태그 변경 할 때 어느 줄에서 바뀌는 지 알려준다.
     function makeGreen() {
       const p = document.querySelector('p');
       p.style.color = '#BADA55';
@@ -18,29 +22,72 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
-
-    // Styled
+    console.log('hello %s', '😃');
+    // Styled %c를 style 적용ㅇ하고 싶은 것 앞에 두면 두번째 인자에 해당하는 css 적용 가능하다.
+    console.log('hello %c I am ', 'font-size:50px; background:red');
 
     // warning!
+    console.warn('oh no');
 
-    // Error :|
+    // Error :|  stack trace 제공
+    console.warn('error!!!!!!');
 
     // Info
+    console.info('I am the best');
 
-    // Testing
+    // Testing 값 테스트 가능.  틀렸을 때 두번재 인자값을 보여준다.
+    const p = document.querySelector('p');
 
-    // clearing
+    console.assert(1 === 1, 'that is wrong');
+    console.assert(1 === 2, 'that is wrong');
+    console.assert(p.classList.contains('outch'), 'There is no ouch');
 
-    // Viewing DOM Elements
+    // clearing  console 기록들을 지워준다.
+    console.clear();
 
+    // Viewing DOM Elements, dir은 해당 객체의 모든 속성을 json과 같은 tree 구조든 보여준다.
+    console.log(p);
+    console.dir(p);
     // Grouping together
+    dogs.forEach((dog) => {
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.year} years old.`);
+      console.groupEnd(`${dog.name}`);
+    })
+    dogs.forEach((dog) => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.year} years old.`);
+      console.groupEnd(`${dog.name}`);
+    })
 
     // counting
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
 
+    console.table(dogs);
   </script>
 </body>
+
 </html>
